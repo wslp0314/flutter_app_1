@@ -39,40 +39,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       appBar: AppBar(
         // Here we take the value from the HomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-        actions: <Widget>[
-          ButtonTheme(
-            minWidth: 0.0,
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: FlatButton(
-              child: Text(
-                'Github',
-                style: TextStyle(
-                  decorationStyle: TextDecorationStyle.solid,
-                  decoration: TextDecoration.underline,
-                  color: Colors.white,
-                ),
-              ),
-              onPressed: () {
-                launch('https://github.com/fluttercandies/extended_tabs');
-              },
-            ),
-          ),
-          ButtonTheme(
-            padding: EdgeInsets.only(right: 10.0),
-            minWidth: 0.0,
-            child: FlatButton(
-              child:
-              Image.network('https://pub.idqqimg.com/wpa/images/group.png'),
-              onPressed: () {
-                launch('https://jq.qq.com/?_wv=1027&k=5bcc0gy');
-              },
-            ),
-          )
-        ],
+        title: Text("我尼玛"),
+
       ),
       body: Column(
         children: <Widget>[
+          SizedBox(
+            height: 100,
+          ),
           TabBar(
             indicator: ColorTabIndicator(Colors.blue),
             labelColor: Colors.black,
@@ -82,6 +56,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ],
             controller: tabController,
           ),
+
           Expanded(
             child: ExtendedTabBarView(
               children: <Widget>[

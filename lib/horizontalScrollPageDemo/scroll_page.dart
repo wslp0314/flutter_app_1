@@ -1,118 +1,145 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_1/extended_tabs/extended_tabs.dart';
 
 class ScrollPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ScrollPageState();
 }
 
-class TabTitle {
-  String title;
-  int id;
 
-  TabTitle(this.title, this.id);
-}
-
-class ScrollPageState extends State<ScrollPage> with SingleTickerProviderStateMixin {
-  TabController mTabController;
-  PageController mPageController = PageController(initialPage: 0);
-  List<TabTitle> tabList;
-  var currentPage = 0;
-  var isPageCanChanged = true;
+class ScrollPageState extends State<ScrollPage> with TickerProviderStateMixin {
+  TabController tabController;
+  TabController tabController1;
+  TabController tabController2;
 
   @override
   void initState() {
+    tabController = TabController(length: 4, vsync: this);
+    tabController1 = TabController(length: 4, vsync: this);
+    tabController2 = TabController(length: 4, vsync: this);
     super.initState();
-    initTabData();
-    mTabController = TabController(
-      length: tabList.length,
-      vsync: this,
-    );
-    mTabController.addListener(() {//TabBar的监听
-      if (mTabController.indexIsChanging) {//判断TabBar是否切换
-        print(mTabController.index);
-        onPageChange(mTabController.index, p: mPageController);
-      }
-    });
   }
-
-  initTabData() {
-    tabList = [
-      new TabTitle('推荐', 10),
-      new TabTitle('热点', 0),
-      new TabTitle('社会', 1),
-      new TabTitle('娱乐', 2),
-      new TabTitle('体育', 3),
-      new TabTitle('美文', 4),
-      new TabTitle('科技', 5),
-      new TabTitle('财经', 6),
-      new TabTitle('时尚', 7)
-    ];
-  }
-  onPageChange(int index, {PageController p, TabController t}) async {
-    if (p != null) {//判断是哪一个切换
-      isPageCanChanged = false;
-      await mPageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);//等待pageview切换完毕,再释放pageivew监听
-      isPageCanChanged = true;
-    } else {
-      mTabController.animateTo(index);//切换Tabbar
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    mTabController.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("首页"),
-        backgroundColor: Color(0xffd43d3d),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.all_inclusive),
-        backgroundColor: Color(0xffd43d3d),
-        elevation: 2.0,
-        highlightElevation: 2.0,
-        onPressed: () {},
-      ),
-      body: Column(
-        children: <Widget>[
-          Container(
-            color: new Color(0xfff4f5f6),
-            height: 38.0,
-            child: TabBar(
-              isScrollable: true,
-              //是否可以滚动
-              controller: mTabController,
-              labelColor: Colors.red,
-              unselectedLabelColor: Color(0xff666666),
-              labelStyle: TextStyle(fontSize: 16.0),
-              tabs: tabList.map((item) {
-                return Tab(
-                  text: item.title,
-                );
-              }).toList(),
-            ),
+    return Column(
+      children: <Widget>[
+        TabBar(
+          indicator: ColorTabIndicator(Colors.red),
+          labelColor: Colors.black,
+          tabs: [
+            Tab(text: "Tab000"),
+            Tab(text: "Tab001"),
+            Tab(text: "Tab002"),
+            Tab(text: "Tab003"),
+          ],
+          controller: tabController,
+        ),
+        Expanded(
+          child: ExtendedTabBarView(
+            children: <Widget>[
+              List("Tab000"),
+              Column(
+                children: <Widget>[
+                  TabBar(
+                    indicator: ColorTabIndicator(Colors.yellow),
+                    labelColor: Colors.black,
+                    tabs: [
+                      Tab(text: "Tab000"),
+                      Tab(text: "Tab001"),
+                      Tab(text: "Tab002"),
+                      Tab(text: "Tab003"),
+                    ],
+                    controller: tabController1,
+                  ),
+                  Expanded(
+                    child: ExtendedTabBarView(
+                      children: <Widget>[
+                        List("Tab000"),
+                        List("Tab001"),
+                        List("Tab002"),
+                        List("Tab003"),
+                      ],
+                      controller: tabController1,
+
+                      ///if linkedParentTabBarView is true and current tabbarview over scroll,
+                      ///it will check whether ancestor tabbarView can be scroll
+                      ///then scroll ancestor tabbarView
+                      linkWithAncestor: true,
+
+                      /// cache page count
+                      /// default is 0.
+                      /// if cacheExtent is 1, it has two pages in cache
+                      /// null is infinity, it will cache all pages
+                      cacheExtent: 1,
+                    ),
+                  )
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  TabBar(
+                    indicator: ColorTabIndicator(Colors.blue),
+                    labelColor: Colors.black,
+                    tabs: [
+                      Tab(text: "Tab000"),
+                      Tab(text: "Tab001"),
+                      Tab(text: "Tab002"),
+                      Tab(text: "Tab003"),
+                    ],
+                    controller: tabController2,
+                  ),
+                  Expanded(
+                    child: ExtendedTabBarView(
+                      children: <Widget>[
+                        List("Tab000"),
+                        List("Tab001"),
+                        List("Tab002"),
+                        List("Tab003"),
+                      ],
+                      controller: tabController2,
+
+                      ///if linkedParentTabBarView is true and current tabbarview over scroll,
+                      ///it will check whether ancestor tabbarView can be scroll
+                      ///then scroll ancestor tabbarView
+                      linkWithAncestor: true,
+
+                      /// cache page count
+                      /// default is 0.
+                      /// if cacheExtent is 1, it has two pages in cache
+                      /// null is infinity, it will cache all pages
+                      cacheExtent: 1,
+                    ),
+                  )
+                ],
+              ),
+              List("Tab003"),
+            ],
+            controller: tabController,
           ),
-          Expanded(
-            child: PageView.builder(
-              itemCount: tabList.length,
-              onPageChanged: (index) {
-                if (isPageCanChanged) {//由于pageview切换是会回调这个方法,又会触发切换tabbar的操作,所以定义一个flag,控制pageview的回调
-                  onPageChange(index);
-                }
-              },
-              controller: mPageController,
-              itemBuilder: (BuildContext context, int index) {
-                return Text(tabList[index].title);
-              },
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
+
+  }
+}
+
+
+
+
+class List extends StatelessWidget {
+  final String tabKey;
+  List(this.tabKey);
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemBuilder: (c, i) {
+          return Container(
+            //decoration: BoxDecoration(border: Border.all(color: Colors.orange,width: 1.0)),
+            alignment: Alignment.center,
+            height: 60.0,
+            child: Text("$tabKey : List$i"),
+          );
+        },
+        itemCount: 100);
   }
 }
