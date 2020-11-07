@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app_1/ProviderDemo/count_model.dart';
+import 'package:flutter_app_1/TabControllerAndPageView/tab_controller_and_page_view.dart';
 import 'package:flutter_app_1/home_page.dart';
 
 import 'package:provider/provider.dart';
@@ -43,7 +44,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('woshinibaba'),
         ),
-        body: ScrollPage(),
+        body: TabControllerAndPageView(),
       ),
     );
   }
