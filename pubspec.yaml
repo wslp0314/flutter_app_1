@@ -23,12 +23,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  mikack:
-    git: git@github.com:Hentioe/mikack-dart.git
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
+  http: ^0.12.2
+  json_serializable: ^3.2.5
+  build_runner: ^1.7.2
+  provider: ^4.3.2+2
+  url_launcher: ^5.7.10
+  extended_tabs: ^0.2.3
+#  flutter_verification_box: ^1.0.3
+#  hb_password_input_textfield: ^0.1.1
+#  mikack:
+#    git: git@github.com:Hentioe/mikack-dart.git
+#  github_releases:
+#    git: git@github.com:Hentioe/github_releases.dart.git
+
 
 dev_dependencies:
   flutter_test:

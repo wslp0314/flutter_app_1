@@ -1,7 +1,8 @@
 class UserBean {
   String name;
   String address;
-  UserBean({this.name,this.address});
+  bool isExpanded;
+  UserBean({this.name,this.address,this.isExpanded = true});
   @override
   String toString() {
     // TODO: implement toString
