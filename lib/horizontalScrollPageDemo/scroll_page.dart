@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_1/extended_tabs/extended_tabs.dart';
-
+import 'package:flutter_app_1/extended_tabs/src/custom_tab_bar.dart';
 class ScrollPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ScrollPageState();
@@ -12,44 +12,79 @@ class ScrollPageState extends State<ScrollPage> with TickerProviderStateMixin {
   TabController tabController1;
   TabController tabController2;
 
+
+
   @override
   void initState() {
     tabController = TabController(length: 4, vsync: this);
     tabController1 = TabController(length: 4, vsync: this);
-    tabController2 = TabController(length: 4, vsync: this);
+    tabController2 = TabController(length: 12, vsync: this);
     super.initState();
   }
+
+
+  // tab
+  Widget _buildTabChildWidget(String text ) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 18,
+        color: Colors.blue
+      ),
+
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    var tabNameList = ['热销1','热销2','热3','热销4',];
+    var tabNameList1 = ['热销1','热销2','热3','热销4','热销1','热销2','热3','热销4','热销1','热销2','热3','热销4',];
+
     return Column(
       children: <Widget>[
-        TabBar(
-          indicator: ColorTabIndicator(Colors.red),
-          labelColor: Colors.black,
-          tabs: [
-            Tab(text: "Tab000"),
-            Tab(text: "Tab001"),
-            Tab(text: "Tab002"),
-            Tab(text: "Tab003"),
-          ],
-          controller: tabController,
+        Container(
+          padding: EdgeInsets.fromLTRB(30,0, 30, 0),
+          child: CustomTabBar(
+            controller: tabController,
+            indicatorColor: Colors.yellow,
+            labelColor: Colors.black.withOpacity(0.85),
+            indicatorSize: CustomTabBarIndicatorSize.label,
+            unselectedLabelColor: Colors.grey.withOpacity(0.65),
+            labelPadding: EdgeInsets.all(0),
+            tabs: tabNameList.map<Widget>((text) =>
+                _buildTabChildWidget(text)
+            ).toList(),
+          ),
         ),
+        // TabBar(
+        //   indicator: ColorTabIndicator(Colors.red),
+        //   labelColor: Colors.black,
+        //   tabs: [
+        //     Tab(text: "Tab000"),
+        //     Tab(text: "Tab001"),
+        //     Tab(text: "Tab002"),
+        //     Tab(text: "Tab003"),
+        //   ],
+        //   controller: tabController,
+        // ),
+        Text("我是你爸爸"),
         Expanded(
           child: ExtendedTabBarView(
             children: <Widget>[
               List("Tab000"),
               Column(
                 children: <Widget>[
-                  TabBar(
-                    indicator: ColorTabIndicator(Colors.yellow),
-                    labelColor: Colors.black,
-                    tabs: [
-                      Tab(text: "Tab000"),
-                      Tab(text: "Tab001"),
-                      Tab(text: "Tab002"),
-                      Tab(text: "Tab003"),
-                    ],
+                  CustomTabBar(
                     controller: tabController1,
+                    indicatorColor: Colors.blue,
+                    labelColor: Colors.white.withOpacity(0.85),
+                    indicatorSize: CustomTabBarIndicatorSize.label,
+                    unselectedLabelColor: Colors.blue.withOpacity(0.65),
+                    labelPadding: EdgeInsets.all(0),
+                    tabs: tabNameList.map<Widget>((text) =>
+                        _buildTabChildWidget(text)
+                    ).toList(),
                   ),
                   Expanded(
                     child: ExtendedTabBarView(
@@ -77,20 +112,29 @@ class ScrollPageState extends State<ScrollPage> with TickerProviderStateMixin {
               ),
               Column(
                 children: <Widget>[
-                  TabBar(
-                    indicator: ColorTabIndicator(Colors.blue),
-                    labelColor: Colors.black,
-                    tabs: [
-                      Tab(text: "Tab000"),
-                      Tab(text: "Tab001"),
-                      Tab(text: "Tab002"),
-                      Tab(text: "Tab003"),
-                    ],
+                  CustomTabBar(
+                    isScrollable: true,
                     controller: tabController2,
+                    indicatorColor: Colors.blue,
+                    labelColor: Colors.white.withOpacity(0.85),
+                    indicatorSize: CustomTabBarIndicatorSize.label,
+                    unselectedLabelColor: Colors.white.withOpacity(0.65),
+                    labelPadding: EdgeInsets.all(3),
+                    tabs: tabNameList1.map<Widget>((text) =>
+                        _buildTabChildWidget(text)
+                    ).toList(),
                   ),
                   Expanded(
                     child: ExtendedTabBarView(
                       children: <Widget>[
+                        List("Tab000"),
+                        List("Tab001"),
+                        List("Tab002"),
+                        List("Tab003"),
+                        List("Tab000"),
+                        List("Tab001"),
+                        List("Tab002"),
+                        List("Tab003"),
                         List("Tab000"),
                         List("Tab001"),
                         List("Tab002"),
