@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_1/ProviderDemo/count_model.dart';
 import 'package:flutter_app_1/TabControllerAndPageView/tab_controller_and_page_view.dart';
 import 'package:flutter_app_1/home_page.dart';
+import 'package:flutter_app_1/showLabelWidth/show_label_width_page.dart';
 
 import 'package:provider/provider.dart';
 
+import 'EventBusDemo/show_event_bus_demo_page.dart';
 import 'ProviderDemo/count_one_page.dart';
 import 'horizontalScrollPageDemo/scroll_page.dart';
 void main() {
@@ -44,7 +46,8 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('woshinibaba'),
         ),
-        body: ScrollPage(),
+        body: ShowLabelWidthPage(),
+        // ScrollPage(),
       ),
     );
   }

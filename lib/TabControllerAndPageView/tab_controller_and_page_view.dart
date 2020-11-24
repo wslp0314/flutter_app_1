@@ -33,6 +33,7 @@ class _TabControllerAndPageViewState extends State<TabControllerAndPageView>
       text,
       style: TextStyle(
         fontSize: 36,
+        color: Colors.black
       ),
     );
   }
@@ -45,12 +46,13 @@ class _TabControllerAndPageViewState extends State<TabControllerAndPageView>
         bottom: CustomTabBar(
           controller: this._tabController,
           indicatorColor: Colors.blue,
-          labelColor: Colors.blue.withOpacity(0.85),
+          labelColor: Colors.black.withOpacity(0.85),
           indicatorSize: CustomTabBarIndicatorSize.label,
           unselectedLabelColor: Colors.white.withOpacity(0.65),
           labelPadding: EdgeInsets.all(0),
           tabs: tabNameList.map<Widget>((text) =>
-              _buildTabChildWidget(text)
+              // _buildTabChildWidget(text)
+            Text(text),
           ).toList(),
         ),
       ),
