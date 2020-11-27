@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ShowLabelWidthPage extends StatefulWidget {
   @override
@@ -54,6 +55,16 @@ class _ShowLabelWidthPageState extends State<ShowLabelWidthPage> {
                 height: 100,
               ),
               Text("哈哈哈"),
+
+              InkWell(
+                onTap: () {
+                  launch("weixin://");
+
+                },
+                child: Container(
+                  child: Text("点击跳转微信"),
+                ),
+              ),
             ],
           )
 
