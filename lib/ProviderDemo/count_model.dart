@@ -12,5 +12,4 @@ class CounterModel with ChangeNotifier {
     //通知所有听众进行刷新
     notifyListeners();
   }
-
 }

@@ -37,6 +37,7 @@ dependencies:
   tabbar_magic_indicator: ^0.0.2
   event_bus: ^1.1.1
   rxdart: ^0.24.1
+  json_annotation: ^3.1.1
 #  flutter_verification_box: ^1.0.3
 #  hb_password_input_textfield: ^0.1.1
 #  mikack:
