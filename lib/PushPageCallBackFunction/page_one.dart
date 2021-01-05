@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_1/PushPageCallBackFunction/page_two.dart';
+import 'package:flutter_app_1/model/UserInfo.dart';
 
 class PageOne extends StatefulWidget {
   @override
@@ -17,6 +18,13 @@ class _PageOneState extends State<PageOne> {
           child: Center(
             child: InkWell(
               onTap: (){
+
+                var result = UserInfo().getUserInfo();
+                if (result == null) return;
+                var userInfo = result;
+                print(userInfo);
+
+
 
                 Navigator.of(context).push(
                     MaterialPageRoute(
