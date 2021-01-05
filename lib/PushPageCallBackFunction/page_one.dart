@@ -17,13 +17,12 @@ class _PageOneState extends State<PageOne> {
         Container(
           child: Center(
             child: InkWell(
-              onTap: (){
+              onTap: () async{
 
-                var result = UserInfo().getUserInfo();
+                var result = await UserInfo().getUserInfo();
                 if (result == null) return;
                 var userInfo = result;
-                print(userInfo);
-
+                print(userInfo.association.cityName);
 
 
                 Navigator.of(context).push(
