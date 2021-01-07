@@ -1,6 +1,17 @@
 import 'package:flutter_app_1/HttpUtil/dio_util.dart';
 
 class UserInfo {
+
+  Future <UserInfo> getUserInfo () async {
+    // http://do.tongye.ren/hwjt-news-user/users-anon/appUser/findAppUserById?id=5f8029634b83e338c1f8e9b1
+    var result = await DioUtils.post("hwjt-news-user/users-anon/appUser/findAppUserById",parameters: {"id":"5f8029634b83e338c1f8e9b1"});
+    if (result ==null) return null;
+    UserInfo temp = UserInfo.fromJson(result);
+    print(temp.id);
+    return temp;
+  }
+
+
   String id;
   String username;
   String password;
@@ -294,14 +305,7 @@ class UserInfo {
     return data;
   }
 
-  Future <UserInfo> getUserInfo () async {
-    // http://do.tongye.ren/hwjt-news-user/users-anon/appUser/findAppUserById?id=5f8029634b83e338c1f8e9b1
-    var result = await DioUtils.post("hwjt-news-user/users-anon/appUser/findAppUserById",parameters: {"id":"5f8029634b83e338c1f8e9b1"});
-    if (result ==null) return null;
-    UserInfo temp = UserInfo.fromJson(result);
-    print(temp.id);
-    return temp;
-  }
+
 }
 
 class Association {

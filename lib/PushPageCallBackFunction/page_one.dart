@@ -18,13 +18,10 @@ class _PageOneState extends State<PageOne> {
           child: Center(
             child: InkWell(
               onTap: () async{
-
                 var result = await UserInfo().getUserInfo();
                 if (result == null) return;
                 var userInfo = result;
                 print(userInfo.association.cityName);
-
-
                 Navigator.of(context).push(
                     MaterialPageRoute(
                         builder: (context) => PageTwo(function: showMessage)));
@@ -38,8 +35,6 @@ class _PageOneState extends State<PageOne> {
             ),
           ),
         ));
-
-
   }
 
   void showMessage () {
